@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}Đăng nhập / Đăng ký | SneakerHub{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-xl-10">
+        <div class="auth-shell">
+            <div class="auth-visual">
+                <span class="badge rounded-pill text-bg-light mb-3">SneakerHub Marketplace</span>
+                <h2>Bán hàng và mua sắm trên một nền tảng hiện đại.</h2>
+                <p>Đăng ký tài khoản người mua hoặc người bán, quản lý đơn hàng, thanh toán QR/COD ngay trên localhost.</p>
+                <div class="auth-feature-list">
+                    <div><i class="bi bi-check-circle-fill"></i> Giao diện giống sàn TMĐT lớn</div>
+                    <div><i class="bi bi-check-circle-fill"></i> Role buyer / seller / admin rõ ràng</div>
+                    <div><i class="bi bi-check-circle-fill"></i> Dashboard người bán trực quan</div>
+                </div>
+            </div>
+            <div class="auth-form-area">
+                <ul class="nav nav-pills nav-justified mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link {% if tab == 'login' %}active{% endif %}" href="?tab=login">Đăng nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if tab == 'register' %}active{% endif %}" href="?tab=register">Đăng ký</a>
+                    </li>
+                </ul>
+
+                {% if tab == 'login' %}
+                <form method="post" class="vstack gap-3">
+                    {% csrf_token %}
+                    <input type="hidden" name="tab" value="login">
+                    <div>
+                        <label class="form-label">{{ login_form.username.label }}</label>
+                        {{ login_form.username }}
+                    </div>
+                    <div>
+                        <label class="form-label">{{ login_form.password.label }}</label>
+                        {{ login_form.password }}
+                    </div>
+                    {% if login_form.non_field_errors %}
+                        <div class="text-danger small">{{ login_form.non_field_errors }}</div>
+                    {% endif %}
+                    <button class="btn btn-market w-100 rounded-pill">Đăng nhập</button>
+                    <p class="small text-center text-muted mb-0">Chưa có tài khoản? <a href="?tab=register">Đăng ký ngay</a></p>
+                </form>
+                {% else %}
+                <form method="post" class="vstack gap-3">
+                    {% csrf_token %}
+                    <input type="hidden" name="tab" value="register">
+                    <div>
+                        <label class="form-label">Tên đăng nhập</label>
+                        {{ register_form.username }}
+                    </div>
+                    <div>
+                        <label class="form-label">{{ register_form.email.label }}</label>
+                        {{ register_form.email }}
+                    </div>
+                    <div>
+                        <label class="form-label">{{ register_form.display_name.label }}</label>
+                        {{ register_form.display_name }}
+                    </div>
+                    <div>
+                        <label class="form-label">{{ register_form.role.label }}</label>
+                        {{ register_form.role }}
+                    </div>
+                    <div>
+                        <label class="form-label">{{ register_form.password1.label }}</label>
+                        {{ register_form.password1 }}
+                    </div>
+                    <div>
+                        <label class="form-label">{{ register_form.password2.label }}</label>
+                        {{ register_form.password2 }}
+                    </div>
+                    {% if register_form.errors %}
+                        <div class="text-danger small">
+                            {% for field in register_form %}
+                                {% for error in field.errors %}<div>{{ error }}</div>{% endfor %}
+                            {% endfor %}
+                            {% for error in register_form.non_field_errors %}<div>{{ error }}</div>{% endfor %}
+                        </div>
+                    {% endif %}
+                    <button class="btn btn-market w-100 rounded-pill">Tạo tài khoản</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

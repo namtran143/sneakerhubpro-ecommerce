@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Xóa sản phẩm | SneakerHub{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="market-card p-4 text-center">
+            <h4 class="mb-3">Xác nhận xóa sản phẩm</h4>
+            <p>Bạn có chắc muốn xóa <strong>{{ product.name }}</strong> không?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger rounded-pill px-4">Xóa</button>
+                <a href="{% url 'seller:products' %}" class="btn btn-outline-secondary rounded-pill px-4">Hủy</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

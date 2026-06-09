@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Lịch sử đơn hàng | SneakerHub{% endblock %}
+{% block content %}
+    <div class="market-card p-4">
+        <div class="section-heading">
+            <h4>Lịch sử đơn hàng</h4>
+            <span class="badge rounded-pill text-bg-light">{{ orders|length }} đơn</span>
+        </div>
+
+        {% if orders %}
+            <div class="vstack gap-3">
+                {% for order in orders %}
+                    <div class="order-history-card">
+                        <div class="d-flex justify-content-between flex-wrap gap-3 mb-3">
+                            <div>
+                                <h5 class="mb-1">{{ order.code }}</h5>
+                                <div class="small text-muted">{{ order.created_at|date:"d/m/Y H:i" }}</div>
+                            </div>
+                            <div class="text-end">
+                                <div class="badge text-bg-light">{{ order.get_status_display }}</div>
+                                <div class="fw-semibold mt-2">{{ order.total|vnd }}đ</div>
+                            </div>
+                        </div>
+                        <div class="vstack gap-2">
+                            {% for item in order.items.all %}
+                                <div class="d-flex justify-content-between small">
+                                    <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                                    <span>{{ item.subtotal|vnd }}đ</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <i class="bi bi-bag-check fs-1"></i>
+                <h5>Bạn chưa có đơn hàng nào</h5>
+                <a href="{% url 'products:product_list' %}" class="btn btn-market rounded-pill">Mua sắm ngay</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

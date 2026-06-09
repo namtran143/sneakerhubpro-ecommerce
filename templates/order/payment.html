@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Thanh toán QR | SneakerHub{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="market-card p-4 text-center">
+            <span class="badge text-bg-info mb-3">QR Banking Demo</span>
+            <h3 class="fw-bold">Quét mã để thanh toán đơn hàng</h3>
+            <p class="text-muted">Sau khi chuyển khoản, bấm nút xác nhận để hoàn tất đơn hàng demo.</p>
+
+            {% if order.qr_code %}
+            <img src="{{ order.qr_code.url }}" alt="QR Banking" class="qr-preview my-3">
+            {% endif %}
+
+            <div class="row g-3 text-start mt-2">
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <small class="text-muted d-block">Mã đơn hàng</small>
+                        <strong>{{ order.code }}</strong>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <small class="text-muted d-block">Nội dung chuyển khoản</small>
+                        <strong>{{ order.transfer_code }}</strong>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <small class="text-muted d-block">Phương thức</small>
+                        <strong>{{ order.get_payment_method_display }}</strong>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <small class="text-muted d-block">Số tiền</small>
+                        <strong class="text-danger">{{ order.total|floatformat:0 }}đ</strong>
+                    </div>
+                </div>
+            </div>
+
+            <form method="post" class="mt-4">
+                {% csrf_token %}
+                <button class="btn btn-market btn-lg rounded-pill px-4">
+                    <i class="bi bi-check-circle"></i> Tôi đã thanh toán
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

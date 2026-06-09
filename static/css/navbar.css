@@ -1,0 +1,43 @@
+.market-navbar {
+    background: linear-gradient(135deg, #ee4d2d, #ff7a45);
+    box-shadow: 0 10px 25px rgba(238, 77, 45, .18);
+}
+
+.market-navbar .nav-link {
+    color: rgba(255,255,255,.92);
+    font-weight: 500;
+}
+
+.market-navbar .nav-link:hover {
+    color: #fff;
+}
+
+.search-pill .input-group {
+    background: #fff;
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, .08);
+}
+
+.search-pill .input-group-text,
+.search-pill .form-control,
+.search-pill .btn {
+    height: 50px;
+}
+
+.cart-badge {
+    position: absolute;
+    top: 2px;
+    right: -6px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: #fff;
+    color: #ee4d2d;
+    font-size: .72rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

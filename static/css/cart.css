@@ -1,0 +1,10 @@
+.cart-table th {
+    white-space: nowrap;
+    color: #64748b;
+    font-weight: 700;
+}
+
+.cart-table td,
+.cart-table th {
+    vertical-align: middle;
+}

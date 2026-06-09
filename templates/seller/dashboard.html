@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Kênh người bán | SneakerHub{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+    <div>
+        <h2 class="fw-bold mb-1">Kênh người bán</h2>
+        <p class="text-muted mb-0">Quản lý sản phẩm, doanh thu và đơn hàng gần đây.</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="{% url 'seller:product_add' %}" class="btn btn-market rounded-pill">Thêm sản phẩm</a>
+        <a href="{% url 'seller:orders' %}" class="btn btn-outline-dark rounded-pill">Quản lý đơn</a>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-4 col-md-6">
+        <div class="stats-card">
+            <span class="stats-icon"><i class="bi bi-bag"></i></span>
+            <h6>Tổng đơn hàng</h6>
+            <h3>{{ order_count }}</h3>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="stats-card">
+            <span class="stats-icon"><i class="bi bi-currency-dollar"></i></span>
+            <h6>Doanh thu</h6>
+            <h3>{{ total_revenue|floatformat:0 }}đ</h3>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="stats-card">
+            <span class="stats-icon"><i class="bi bi-box-seam"></i></span>
+            <h6>Số sản phẩm</h6>
+            <h3>{{ product_count }}</h3>
+        </div>
+    </div>
+</div>
+
+<div class="market-card p-4">
+    <div class="section-heading">
+        <h4>Đơn hàng gần đây</h4>
+        <a href="{% url 'seller:orders' %}" class="btn btn-outline-secondary btn-sm rounded-pill">Xem tất cả</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Mã đơn</th>
+                    <th>Khách hàng</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in recent_orders %}
+                <tr>
+                    <td>{{ order.code }}</td>
+                    <td>{{ order.user.display_name }}</td>
+                    <td>{{ order.total|floatformat:0 }}đ</td>
+                    <td><span class="badge text-bg-light">{{ order.get_status_display }}</span></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4" class="text-center text-muted">Chưa có đơn hàng nào.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

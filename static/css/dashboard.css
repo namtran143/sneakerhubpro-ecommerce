@@ -1,0 +1,20 @@
+.stats-card {
+    background: linear-gradient(135deg, #fff, #fff7f3);
+    border: 1px solid rgba(238, 77, 45, .12);
+    border-radius: 24px;
+    padding: 1.4rem;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, .05);
+}
+
+.stats-icon {
+    width: 54px;
+    height: 54px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: rgba(238, 77, 45, .08);
+    color: #ee4d2d;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}

@@ -1,0 +1,335 @@
+{% extends 'base.html' %}
+{% block title %}Trang chủ | SneakerHub{% endblock %}
+{% block content %}
+
+    <section class="hero-market mb-4">
+        <div class="row g-3 align-items-stretch">
+            <div class="col-lg-2 d-none d-lg-block">
+                <div class="side-ad-card side-ad-premium h-100" data-aos="fade-right">
+                    <div class="side-ad-decor"></div>
+                    <div class="position-relative z-2">
+                        <span class="ad-chip ad-chip-gold">Ưu đãi thành viên</span>
+                        <h4>Giảm đến 50%</h4>
+                        <p>Deal giới hạn cho sneaker hot trend tuần này. Săn mã độc quyền cho thành viên SneakerHub.</p>
+                        <ul class="side-ad-list">
+                            <li><i class="bi bi-check2-circle"></i> Hoàn xu mỗi đơn</li>
+                            <li><i class="bi bi-check2-circle"></i> Freeship nội thành</li>
+                            <li><i class="bi bi-check2-circle"></i> Flash sale mỗi ngày</li>
+                        </ul>
+                    </div>
+                    <a href="{% url 'products:product_list' %}" class="btn btn-light rounded-pill side-ad-btn">Mua ngay</a>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="hero-shell hero-shell-premium" data-aos="zoom-in">
+                    <div class="hero-glow hero-glow-1"></div>
+                    <div class="hero-glow hero-glow-2"></div>
+                    <div class="hero-pattern"></div>
+
+                    <div class="swiper heroSwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide hero-slide hero-slide-1">
+                                <div class="hero-content">
+                                    <div class="hero-top-badges">
+                                        <span class="hero-label">Bộ sưu tập mới</span>
+                                        <span class="hero-soft-badge"><i class="bi bi-lightning-charge-fill"></i> Hot trend</span>
+                                    </div>
+                                    <h2>Sneaker chuẩn xu hướng, giá tốt mỗi ngày</h2>
+                                    <p>Mẫu chạy bộ, lifestyle, thời trang đường phố cập nhật liên tục. Ưu đãi mới mỗi ngày, mua sắm nhanh và hiện đại như một sàn thương mại điện tử thực thụ.</p>
+
+                                    <div class="hero-feature-pills">
+                                        <span><i class="bi bi-patch-check-fill"></i> Hàng chọn lọc</span>
+                                        <span><i class="bi bi-truck"></i> Freeship chọn lọc</span>
+                                        <span><i class="bi bi-credit-card-2-front"></i> QR & COD</span>
+                                    </div>
+
+                                    <div class="hero-actions">
+                                        <a href="{% url 'products:product_list' %}" class="btn btn-market btn-lg rounded-pill px-4">Khám phá ngay</a>
+                                        <a href="#flash-sale" class="btn btn-light btn-lg rounded-pill px-4 hero-btn-sub">Xem deal hot</a>
+                                    </div>
+
+                                    <div class="hero-stats">
+                                        <div class="hero-stat-box">
+                                            <strong>1K+</strong>
+                                            <span>Sản phẩm</span>
+                                        </div>
+                                        <div class="hero-stat-box">
+                                            <strong>50%</strong>
+                                            <span>Deal giảm sâu</span>
+                                        </div>
+                                        <div class="hero-stat-box">
+                                            <strong>24/7</strong>
+                                            <span>Đặt hàng mọi lúc</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide hero-slide hero-slide-2">
+                                <div class="hero-content">
+                                    <div class="hero-top-badges">
+                                        <span class="hero-label">Flash Sale</span>
+                                        <span class="hero-soft-badge"><i class="bi bi-alarm"></i> Giới hạn hôm nay</span>
+                                    </div>
+                                    <h2>Deal chớp nhoáng đến hết hôm nay</h2>
+                                    <p>Freeship, voucher thành viên, giảm sâu cho các mẫu bán chạy. Đừng bỏ lỡ những sản phẩm đang lên xu hướng trong tuần này.</p>
+
+                                    <div class="deal-countdown">
+                                        <div class="count-box">
+                                            <strong>02</strong>
+                                            <span>Giờ</span>
+                                        </div>
+                                        <div class="count-box">
+                                            <strong>18</strong>
+                                            <span>Phút</span>
+                                        </div>
+                                        <div class="count-box">
+                                            <strong>45</strong>
+                                            <span>Giây</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="hero-actions">
+                                        <a href="#flash-sale" class="btn btn-light btn-lg rounded-pill px-4">Xem ưu đãi</a>
+                                        <a href="{% url 'products:product_list' %}?sort=sold" class="btn btn-market btn-lg rounded-pill px-4">Mua ngay</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide hero-slide hero-slide-3">
+                                <div class="hero-content">
+                                    <div class="hero-top-badges">
+                                        <span class="hero-label">Marketplace</span>
+                                        <span class="hero-soft-badge"><i class="bi bi-shop"></i> Kênh người bán</span>
+                                    </div>
+                                    <h2>Người bán cá nhân có thể mở gian hàng ngay</h2>
+                                    <p>Quản lý sản phẩm, đơn hàng, doanh thu trên một dashboard riêng. Phù hợp để chạy web thương mại điện tử localhost chuyên nghiệp.</p>
+
+                                    <div class="seller-mini-cards">
+                                        <div class="seller-mini-card">
+                                            <i class="bi bi-box-seam"></i>
+                                            <span>Quản lý sản phẩm</span>
+                                        </div>
+                                        <div class="seller-mini-card">
+                                            <i class="bi bi-bar-chart-line"></i>
+                                            <span>Theo dõi doanh thu</span>
+                                        </div>
+                                        <div class="seller-mini-card">
+                                            <i class="bi bi-receipt"></i>
+                                            <span>Quản lý đơn hàng</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="hero-actions">
+                                        <a href="{% url 'users:auth' %}?tab=register" class="btn btn-light btn-lg rounded-pill px-4">Bắt đầu bán</a>
+                                        <a href="{% url 'seller:dashboard' %}" class="btn btn-market btn-lg rounded-pill px-4">Vào dashboard</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+
+                <div class="hero-benefit-strip row g-3 mt-1">
+                    <div class="col-md-3 col-6">
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="bi bi-truck"></i></div>
+                            <div>
+                                <strong>Freeship</strong>
+                                <span>Cho đơn chọn lọc</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="bi bi-shield-check"></i></div>
+                            <div>
+                                <strong>Chính hãng</strong>
+                                <span>Chọn lọc người bán</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="bi bi-qr-code-scan"></i></div>
+                            <div>
+                                <strong>QR / COD</strong>
+                                <span>Thanh toán linh hoạt</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="bi bi-stars"></i></div>
+                            <div>
+                                <strong>Deal đẹp</strong>
+                                <span>Cập nhật mỗi ngày</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-1">
+                    <div class="col-md-6">
+                        <div class="mini-banner banner-orange">
+                            <div>
+                                <small>Voucher</small>
+                                <h5>Nhập mã GIAM50</h5>
+                                <p>Giảm ngay cho đơn từ 999K, áp dụng số lượng có hạn.</p>
+                            </div>
+                            <div class="mini-banner-icon"><i class="bi bi-ticket-perforated"></i></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mini-banner banner-blue">
+                            <div>
+                                <small>Freeship</small>
+                                <h5>Miễn phí vận chuyển</h5>
+                                <p>Áp dụng cho nội thành Hà Nội & TP.HCM trong khung giờ vàng.</p>
+                            </div>
+                            <div class="mini-banner-icon"><i class="bi bi-truck"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-2 d-none d-lg-grid gap-3">
+                <div class="small-ad-card ad-purple" data-aos="fade-left">
+                    <div class="ad-card-bg-icon"><i class="bi bi-gift"></i></div>
+                    <div class="position-relative z-2">
+                        <p class="mb-1 small">Ưu đãi người mới</p>
+                        <h6>Giảm 80K</h6>
+                        <span>Cho đơn đầu tiên</span>
+                    </div>
+                </div>
+                <div class="small-ad-card ad-green" data-aos="fade-left" data-aos-delay="120">
+                    <div class="ad-card-bg-icon"><i class="bi bi-qr-code"></i></div>
+                    <div class="position-relative z-2">
+                        <p class="mb-1 small">Thanh toán QR</p>
+                        <h6>Nhanh gọn</h6>
+                        <span>Xử lý đơn tức thì</span>
+                    </div>
+                </div>
+                <div class="small-ad-card ad-dark" data-aos="fade-left" data-aos-delay="220">
+                    <div class="ad-card-bg-icon"><i class="bi bi-bar-chart-line"></i></div>
+                    <div class="position-relative z-2">
+                        <p class="mb-1 small">Seller Dashboard</p>
+                        <h6>Quản lý chuyên nghiệp</h6>
+                        <span>Sản phẩm, đơn, doanh thu</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="market-card market-card-glow p-4 mb-4" data-aos="fade-up">
+        <div class="section-heading">
+            <div>
+                <span class="section-label section-label-orange">Khám phá nhanh</span>
+                <h4>Danh mục nổi bật</h4>
+            </div>
+            <a href="{% url 'products:product_list' %}" class="btn btn-outline-secondary btn-sm rounded-pill">Xem tất cả</a>
+        </div>
+        <div class="row g-3">
+            {% for category in categories %}
+                <div class="col-lg-2 col-md-3 col-6">
+                    <a class="category-box text-decoration-none" href="{% url 'products:product_list' %}?category={{ category.slug }}">
+                        <div class="category-icon"><i class="bi {{ category.icon }}"></i></div>
+                        <span>{{ category.name }}</span>
+                    </a>
+                </div>
+                {% empty %}
+                <p class="text-muted mb-0">Chưa có danh mục.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="flash-sale" class="market-card flash-sale-shell p-4 mb-4" data-aos="fade-up">
+        <div class="section-heading">
+            <div>
+                <span class="section-label section-label-danger">Flash Sale</span>
+                <h4 class="mb-0">Ưu đãi giới hạn hôm nay</h4>
+            </div>
+            <div class="flash-sale-meta">
+                <span class="flash-pill"><i class="bi bi-lightning-charge-fill"></i> Giá sốc</span>
+                <span class="flash-pill"><i class="bi bi-clock-history"></i> Kết thúc sớm</span>
+                <a href="{% url 'products:product_list' %}?sort=sold" class="btn btn-outline-danger btn-sm rounded-pill">Mua ngay</a>
+            </div>
+        </div>
+        <div class="row g-3">
+            {% for product in flash_sale_products %}
+                {% include 'partials/product_card.html' with product=product %}
+                {% empty %}
+                <p class="text-muted">Chưa có sản phẩm flash sale.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="market-card market-card-glow p-4 mb-4" data-aos="fade-up">
+        <div class="section-heading">
+            <div>
+                <span class="section-label section-label-blue">Trending</span>
+                <h4>Sản phẩm nổi bật</h4>
+            </div>
+            <a href="{% url 'products:product_list' %}" class="btn btn-outline-secondary btn-sm rounded-pill">Tất cả sản phẩm</a>
+        </div>
+        <div class="row g-3">
+            {% for product in featured_products %}
+                {% include 'partials/product_card.html' with product=product %}
+                {% empty %}
+                <p class="text-muted">Chưa có sản phẩm nổi bật.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="market-card market-card-glow p-4 mb-4" data-aos="fade-up">
+        <div class="section-heading">
+            <div>
+                <span class="section-label section-label-green">New Arrival</span>
+                <h4>Hàng mới về</h4>
+            </div>
+            <a href="{% url 'products:product_list' %}?sort=new" class="btn btn-outline-secondary btn-sm rounded-pill">Xem thêm</a>
+        </div>
+        <div class="row g-3">
+            {% for product in new_products %}
+                {% include 'partials/product_card.html' with product=product %}
+                {% empty %}
+                <p class="text-muted">Chưa có sản phẩm mới.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="market-card p-4 brand-strip-card" data-aos="fade-up">
+        <div class="section-heading mb-3">
+            <div>
+                <span class="section-label section-label-purple">Thương hiệu hot</span>
+                <h4>Xu hướng được quan tâm</h4>
+            </div>
+        </div>
+
+        <div class="brand-strip">
+            <div class="brand-chip">Nike</div>
+            <div class="brand-chip">Adidas</div>
+            <div class="brand-chip">Puma</div>
+            <div class="brand-chip">New Balance</div>
+            <div class="brand-chip">Asics</div>
+            <div class="brand-chip">Converse</div>
+            <div class="brand-chip">Lifestyle</div>
+            <div class="brand-chip">Running</div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        const heroSwiper = new Swiper('.heroSwiper', {
+            loop: true,
+            autoplay: { delay: 4200, disableOnInteraction: false },
+            speed: 850,
+            pagination: { el: '.swiper-pagination', clickable: true },
+        });
+    </script>
+{% endblock %}

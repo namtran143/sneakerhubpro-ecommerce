@@ -1,0 +1,106 @@
+.product-card {
+    background: #fff;
+    border: 1px solid rgba(226, 232, 240, .85);
+    border-radius: 24px;
+    overflow: hidden;
+    height: 100%;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, .04);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(238, 77, 45, .14);
+}
+
+.product-thumb {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(180deg, #fffaf7, #f8fafc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.product-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sale-badge {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    background: linear-gradient(135deg, #ef4444, #f59e0b);
+    color: white;
+    font-size: .8rem;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: .35rem .75rem;
+}
+
+.product-body {
+    padding: 1rem 1rem .5rem;
+}
+
+.product-name {
+    min-height: 44px;
+    line-height: 1.4;
+    font-size: .96rem;
+    font-weight: 600;
+}
+
+.price-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: center;
+    margin: .5rem 0;
+}
+
+.final-price,
+.detail-price {
+    color: #ee4d2d;
+    font-weight: 800;
+}
+
+.final-price { font-size: 1.08rem; }
+.detail-price { font-size: 2rem; }
+
+.old-price,
+.detail-old-price {
+    color: #94a3b8;
+    text-decoration: line-through;
+}
+
+.rating-row {
+    display: flex;
+    justify-content: space-between;
+    gap: .75rem;
+    align-items: center;
+    font-size: .85rem;
+}
+
+.detail-gallery {
+    background: linear-gradient(180deg, #fffaf7, #f8fafc);
+    border-radius: 28px;
+    padding: 1.5rem;
+    border: 1px solid rgba(226, 232, 240, .85);
+}
+
+.price-panel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background: linear-gradient(135deg, #fff1eb, #fff7ed);
+    border: 1px dashed rgba(238, 77, 45, .28);
+    padding: 1rem 1.2rem;
+    border-radius: 22px;
+}
+
+.related-item:hover {
+    border-color: rgba(238, 77, 45, .28);
+}

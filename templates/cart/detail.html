@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}Giỏ hàng | SneakerHub{% endblock %}
+{% block content %}
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="market-card p-4">
+                <div class="section-heading">
+                    <h4>Giỏ hàng của bạn</h4>
+                    <span class="badge rounded-pill text-bg-light">{{ items|length }} sản phẩm</span>
+                </div>
+
+                {% if items %}
+                    <div class="table-responsive">
+                        <table class="table align-middle cart-table">
+                            <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                                <th>Tạm tính</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in items %}
+                                <tr>
+                                    <td>
+                                        <div class="fw-semibold">{{ item.product.name }}</div>
+                                        <div class="small text-muted">Kho: {{ item.product.stock }}</div>
+                                    </td>
+                                    <td>{{ item.product.final_price|vnd }}đ</td>
+                                    <td>
+                                        <form action="{% url 'cart:update' item.id %}" method="post" class="d-flex gap-2">
+                                            {% csrf_token %}
+                                            <input type="number" class="form-control form-control-sm" style="width: 90px;" name="quantity" min="1" max="{{ item.product.stock }}" value="{{ item.quantity }}">
+                                            <button class="btn btn-outline-secondary btn-sm">Cập nhật</button>
+                                        </form>
+                                    </td>
+                                    <td>{{ item.subtotal|vnd }}đ</td>
+                                    <td>
+                                        <a href="{% url 'cart:remove' item.id %}" class="btn btn-sm btn-outline-danger">Xóa</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <i class="bi bi-cart-x fs-1"></i>
+                        <h5>Giỏ hàng đang trống</h5>
+                        <p>Hãy quay lại để chọn thêm sản phẩm nhé.</p>
+                        <a href="{% url 'products:product_list' %}" class="btn btn-market rounded-pill">Mua sắm ngay</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="market-card p-4">
+                <h5 class="mb-3">Tóm tắt đơn hàng</h5>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Tạm tính</span>
+                    <strong>{{ cart_total|vnd }}đ</strong>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Phí vận chuyển</span>
+                    <strong>Miễn phí</strong>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between fs-5 mb-4">
+                    <span>Tổng cộng</span>
+                    <strong class="text-danger">{{ cart_total|vnd }}đ</strong>
+                </div>
+                <a href="{% url 'orders:checkout' %}" class="btn btn-market w-100 rounded-pill">Tiến hành thanh toán</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

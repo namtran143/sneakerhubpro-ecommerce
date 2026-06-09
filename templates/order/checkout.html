@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Thanh toán | SneakerHub{% endblock %}
+{% block content %}
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="market-card p-4">
+                <h4 class="mb-4">Thông tin nhận hàng</h4>
+                <form method="post" class="vstack gap-3">
+                    {% csrf_token %}
+                    <div>
+                        <label class="form-label">{{ form.address.label }}</label>
+                        {{ form.address }}
+                    </div>
+                    <div>
+                        <label class="form-label">{{ form.phone.label }}</label>
+                        {{ form.phone }}
+                    </div>
+                    <div>
+                        <label class="form-label d-block">{{ form.payment_method.label }}</label>
+                        <div class="payment-options">{{ form.payment_method }}</div>
+                    </div>
+                    <div>
+                        <label class="form-label">{{ form.note.label }}</label>
+                        {{ form.note }}
+                    </div>
+                    <button class="btn btn-market btn-lg rounded-pill">Đặt hàng</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="market-card p-4">
+                <h5 class="mb-3">Sản phẩm trong đơn</h5>
+                <div class="vstack gap-3">
+                    {% for item in cart_items %}
+                        <div class="d-flex justify-content-between gap-3">
+                            <div>
+                                <div class="fw-semibold">{{ item.product.name }}</div>
+                                <div class="small text-muted">SL: {{ item.quantity }}</div>
+                            </div>
+                            <strong>{{ item.subtotal|vnd }}đ</strong>
+                        </div>
+                    {% endfor %}
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between fs-5">
+                    <span>Tổng thanh toán</span>
+                    <strong class="text-danger">{{ cart_total|vnd }}đ</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

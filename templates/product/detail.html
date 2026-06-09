@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load product_tags %}
+{% block title %}{{ product.name }} | SneakerHub{% endblock %}
+{% block content %}
+<div class="market-card p-4 mb-4">
+    <div class="row g-4">
+        <div class="col-lg-5">
+            <div class="detail-gallery">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded-4">
+                {% else %}
+                    <img src="{% static 'images/product-placeholder.svg' %}" alt="{{ product.name }}" class="img-fluid rounded-4">
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <span class="badge text-bg-danger mb-2">Marketplace Choice</span>
+            <h2 class="fw-bold">{{ product.name }}</h2>
+            <div class="d-flex align-items-center flex-wrap gap-3 mb-3">
+                <div class="stars text-warning">
+                    {% for i in "12345" %}
+                    <i class="bi {{ product.average_rating|star_class:i }}"></i>
+                    {% endfor %}
+                </div>
+                <span class="text-muted">{{ product.average_rating }}/5 · {{ product.total_reviews }} đánh giá</span>
+                <span class="text-muted">Đã bán {{ product.sold_count }}</span>
+            </div>
+
+            <div class="price-panel mb-4">
+                {% if product.discount_percent %}
+                <span class="detail-old-price">{{ product.price|floatformat:0 }}đ</span>
+                {% endif %}
+                <span class="detail-price">{{ product.final_price|floatformat:0 }}đ</span>
+                {% if product.discount_percent %}
+                <span class="badge text-bg-warning text-dark">Tiết kiệm {{ product.discount_percent }}%</span>
+                {% endif %}
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 g-3 mb-4">
+                <div class="col">
+                    <div class="info-box">
+                        <div class="small text-muted">Tồn kho</div>
+                        <strong>{{ product.stock }} sản phẩm</strong>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="info-box">
+                        <div class="small text-muted">Người bán</div>
+                        <strong>{{ product.seller.display_name }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-muted">{{ product.description }}</p>
+
+            <div class="d-flex gap-2 flex-wrap mt-4">
+                <form method="post" action="{% url 'cart:add' product.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button class="btn btn-market btn-lg rounded-pill px-4"><i class="bi bi-cart-plus"></i> Thêm vào giỏ</button>
+                </form>
+                <a href="{% url 'cart:detail' %}" class="btn btn-outline-dark btn-lg rounded-pill px-4">Mua ngay</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="market-card p-4">
+            <div class="section-heading">
+                <h4>Đánh giá sản phẩm</h4>
+                <span class="badge rounded-pill text-bg-light">{{ product.total_reviews }} nhận xét</span>
+            </div>
+
+            {% if request.user.is_authenticated %}
+            <form action="{% url 'products:add_review' product.id %}" method="post" class="review-form mb-4">
+                {% csrf_token %}
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Số sao</label>
+                        {{ review_form.rating }}
+                    </div>
+                    <div class="col-md-9">
+                        <label class="form-label">Nhận xét</label>
+                        {{ review_form.comment }}
+                    </div>
+                </div>
+                <button class="btn btn-market rounded-pill mt-3">Gửi đánh giá</button>
+            </form>
+            {% else %}
+            <div class="alert alert-light border">Bạn cần <a href="{% url 'users:auth' %}?tab=login">đăng nhập</a> để gửi đánh giá.</div>
+            {% endif %}
+
+            <div class="vstack gap-3">
+                {% for review in product.reviews.all %}
+                <div class="review-item">
+                    <div class="d-flex justify-content-between gap-3">
+                        <div>
+                            <h6 class="mb-1">{{ review.user.display_name }}</h6>
+                            <div class="stars text-warning small">
+                                {% for i in "12345" %}
+                                <i class="bi {{ review.rating|star_class:i }}"></i>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <small class="text-muted">{{ review.created_at|date:"d/m/Y H:i" }}</small>
+                    </div>
+                    <p class="text-muted mb-0 mt-2">{{ review.comment }}</p>
+                </div>
+                {% empty %}
+                <p class="text-muted mb-0">Chưa có đánh giá nào cho sản phẩm này.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="market-card p-4 mb-4">
+            <h5 class="mb-3">Khuyến mãi đi kèm</h5>
+            <ul class="list-unstyled promo-list mb-0">
+                <li><i class="bi bi-check-circle-fill text-success"></i> Miễn phí đổi trả 7 ngày</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> Voucher freeship nội thành</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> Bảo hành keo đế 30 ngày</li>
+            </ul>
+        </div>
+
+        <div class="market-card p-4">
+            <div class="section-heading">
+                <h5>Sản phẩm liên quan</h5>
+            </div>
+            <div class="vstack gap-3">
+                {% for item in related_products %}
+                <a href="{{ item.get_absolute_url }}" class="related-item text-decoration-none text-dark">
+                    <div class="fw-semibold">{{ item.name }}</div>
+                    <div class="small text-muted">{{ item.final_price|floatformat:0 }}đ</div>
+                </a>
+                {% empty %}
+                <p class="text-muted mb-0">Chưa có sản phẩm liên quan.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

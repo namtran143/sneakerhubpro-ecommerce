@@ -1,0 +1,29 @@
+.payment-options ul {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    gap: .75rem;
+}
+
+.payment-options li label {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: .95rem 1rem;
+    cursor: pointer;
+    display: flex;
+    gap: .6rem;
+    align-items: center;
+}
+
+.qr-preview {
+    max-width: 280px;
+    width: 100%;
+    border-radius: 24px;
+    box-shadow: 0 18px 36px rgba(15, 23, 42, .08);
+}
+
+.success-box {
+    background: linear-gradient(180deg, #ffffff, #f8fffb);
+}

@@ -1,0 +1,44 @@
+{% load static %}
+{% load product_tags %}
+<div class="col-lg-2 col-md-3 col-6">
+    <div class="product-card h-100">
+        <a href="{{ product.get_absolute_url }}" class="text-decoration-none text-dark">
+            <div class="product-thumb">
+                {% if product.discount_percent %}
+                    <span class="sale-badge">-{{ product.discount_percent }}%</span>
+                {% endif %}
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+                {% else %}
+                    <img src="{% static 'images/product-placeholder.svg' %}" alt="{{ product.name }}" class="img-fluid">
+                {% endif %}
+            </div>
+            <div class="product-body">
+                <h6 class="product-name">{{ product.name }}</h6>
+                <div class="price-group">
+                    <span class="final-price">{{ product.final_price|vnd }}đ</span>
+                    {% if product.discount_percent %}
+                        <span class="old-price">{{ product.price|vnd }}đ</span>
+                    {% endif %}
+                </div>
+                <div class="rating-row">
+                    <div class="stars text-warning">
+                        {% for i in "12345" %}
+                            <i class="bi {{ product.average_rating|star_class:i }}"></i>
+                        {% endfor %}
+                    </div>
+                    <span class="small text-muted">Đã bán {{ product.sold_count }}</span>
+                </div>
+            </div>
+        </a>
+        <div class="p-3 pt-0 mt-auto">
+            <form method="post" action="{% url 'cart:add' product.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button type="submit" class="btn btn-market-outline w-100 rounded-pill">
+                    <i class="bi bi-cart-plus"></i> Thêm giỏ
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

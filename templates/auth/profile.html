@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Hồ sơ cá nhân | SneakerHub{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="market-card p-4">
+            <div class="section-heading">
+                <h4>Hồ sơ tài khoản</h4>
+                <span class="badge rounded-pill text-bg-light">{{ request.user.get_role_display }}</span>
+            </div>
+            <form method="post" class="vstack gap-3">
+                {% csrf_token %}
+                <div>
+                    <label class="form-label">Tên hiển thị</label>
+                    {{ form.display_name }}
+                </div>
+                <div>
+                    <label class="form-label">Email</label>
+                    {{ form.email }}
+                </div>
+                <button class="btn btn-market rounded-pill">Lưu thay đổi</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
